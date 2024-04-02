@@ -22,9 +22,9 @@ under the License.
    <modelVersion>4.0.0</modelVersion>
 
    <parent>
-      <groupId>org.apache.activemq</groupId>
+      <groupId>com.redhat.amq-broker</groupId>
       <artifactId>artemis-prometheus-metrics-pom</artifactId>
-      <version>1.1.0</version>
+      <version>3.0.0</version>
    </parent>
 
    <artifactId>artemis-prometheus-metrics-plugin-servlet</artifactId>
@@ -33,21 +33,16 @@ under the License.
 
    <dependencies>
       <dependency>
-         <groupId>org.apache.tomcat</groupId>
-         <artifactId>tomcat-servlet-api</artifactId>
-         <version>8.5.5</version>
-         <scope>provided</scope> <!-- this is provided by the broker -->
+         <groupId>jakarta.servlet</groupId>
+         <artifactId>jakarta.servlet-api</artifactId>
       </dependency>
       <dependency>
          <groupId>io.micrometer</groupId>
          <artifactId>micrometer-core</artifactId>
-         <version>1.1.4</version>
-         <scope>provided</scope> <!-- this is provided by the broker -->
       </dependency>
       <dependency>
          <groupId>io.micrometer</groupId>
          <artifactId>micrometer-registry-prometheus</artifactId>
-         <version>1.1.4</version>
          <scope>provided</scope> <!-- this will be provided by the artemis-prometheus-metrics-plugin uber jar -->
       </dependency>
    </dependencies>
@@ -56,14 +51,19 @@ under the License.
       <plugins>
          <plugin>
             <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-war-plugin</artifactId>
+            <version>3.3.1</version>
+         </plugin>
+
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-compiler-plugin</artifactId>
             <configuration>
-               <source>8</source>
-               <target>8</target>
+               <source>11</source>
+               <target>11</target>
             </configuration>
          </plugin>
       </plugins>
       <finalName>metrics</finalName>
    </build>
 </project>
-
